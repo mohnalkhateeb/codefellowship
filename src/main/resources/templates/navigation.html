@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<nav th:fragment="navNoUserLoggedIn" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Code Fellowship</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav2">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Log In</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/signup">Sign Up</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<nav th:fragment="navUserLoggedIn(user)" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/myprofile">Code Fellowship</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/users">All Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/post">Create A Post</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/feed">Feed</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/myprofile">My Profile</a>
+            </li>
+        </ul>
+    </div>
+    <p style="margin: 0px; padding: 10px">active user: <span th:text="${user.username}"></span> </p>
+</nav>
+</html>
