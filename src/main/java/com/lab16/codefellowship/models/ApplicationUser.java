@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class ApplicationUser implements UserDetails {
     @Id
-    @Column(name = "id",  unique = true)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
