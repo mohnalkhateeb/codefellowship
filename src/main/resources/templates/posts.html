@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:fragment="posts(applicationUser, currentUser)">
+	<ul th:each="post : ${applicationUser.posts}" style="border-top-style: dashed; list-style-type: none">
+		<li><br><b>Created At:</b> <span th:text="${post.createdAt}">Time Stamp</span></li>
+		<li th:if="${applicationUser} != ${currentUser}"><b>Author:</b> <span th:text="${singleFollower.username}"></span></li>
+		<li th:text="${post.body}">Body</li>
+		<li th:if="${applicationUser} != ${currentUser}"><a th:href="'/users/' + ${singleFollower.id}">View my profile</a></li>
+	</ul>
+</div>
+</html>

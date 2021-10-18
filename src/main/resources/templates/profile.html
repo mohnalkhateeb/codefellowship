@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8">
+		<title>Code Fellowship - My Profile</title>
+
+	</head>
+	
+	<body>
+		<header class="jumbotron">
+			<div th:replace="navigation :: navUserLoggedIn(user=${applicationUser})"></div>
+		</header>
+		
+		<main class="container">
+			<h1>Welcome, <span th:text="${applicationUser.firstName} + ' ' + ${applicationUser.lastName}"></span>!</h1>
+			<div>
+				<div th:replace="userInfo :: userInfo(applicationUser=${applicationUser})"></div>
+				<div th:replace="posts :: posts(applicationUser=${applicationUser}, currentUser=${applicationUser})"></div>
+			</div>
+		</main>
+	</body>
+</html>

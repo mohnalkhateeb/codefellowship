@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8">
+		<title>Code Fellowship - Post</title>
+	</head>
+	
+	<body>
+		<header class="jumbotron">
+			<div th:replace="navigation :: navUserLoggedIn(user=${applicationUser})"></div>
+		</header>
+	
+		<main class="container">
+			<form method="POST" action="/post">
+				<div class="form-group">
+					<label for="body">Write a new post:</label>
+					<textarea class="form-control" name="body" id="body" rows="5"></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</main>
+	</body>
+</html>
