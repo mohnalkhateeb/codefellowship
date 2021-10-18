@@ -36,19 +36,19 @@ public class ApplicationUserController {
         applicationUserRepository.save(newUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new RedirectView("/myprofile");
+        return new RedirectView("/profile");
     }
 
-    @GetMapping("/myprofile")
-    public String getMyProfile(Principal p, Model m) {
-        ApplicationUser applicationUser = (ApplicationUser) applicationUserRepository.findApplicationUser(p.getName());
+    @GetMapping("/profile")
+    public String getProfile(Principal p, Model m) {
+        ApplicationUser applicationUser = applicationUserRepository.findApplicationUserByUsername(p.getName());
         m.addAttribute("applicationUser", applicationUser);
-        return "myprofile";
+        return "profile";
     }
 
     @GetMapping("/users")
     public String getAllUsers(Principal p, Model m) {
-        ApplicationUser applicationUser = (ApplicationUser) applicationUserRepository.findApplicationUser(p.getName());
+        ApplicationUser applicationUser =  applicationUserRepository.findApplicationUserByUsername(p.getName());
         List<ApplicationUser> allUsers = applicationUserRepository.findAll();
         m.addAttribute("applicationUser", applicationUser);
         m.addAttribute("allUsers", allUsers);
@@ -58,7 +58,7 @@ public class ApplicationUserController {
     @GetMapping("/users/{id}")
     public String getOneUser(@PathVariable long id, Principal p, Model m) {
         ApplicationUser otherUser = applicationUserRepository.findById(id).get();
-        ApplicationUser currentUser = (ApplicationUser) applicationUserRepository.findApplicationUser(p.getName());
+        ApplicationUser currentUser =  applicationUserRepository.findApplicationUserByUsername(p.getName());
         m.addAttribute("otherUser", otherUser);
         m.addAttribute("currentUser", currentUser);
         return "singleUser";

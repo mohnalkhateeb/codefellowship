@@ -3,13 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Code Fellowship - My Profile</title>
-		<link
-		 href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		 rel="stylesheet"
-		 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-		 crossorigin="anonymous"
-		>
-		<link href="/style.css" rel="stylesheet">
+
 	</head>
 	
 	<body>
@@ -20,8 +14,8 @@
 		<main class="container">
 			<h1>Welcome, <span th:text="${applicationUser.firstName} + ' ' + ${applicationUser.lastName}"></span>!</h1>
 			<div>
-				<div th:replace="fragments/userInfo :: userInfo(appUser=${applicationUser})"></div>
-				<div th:replace="fragments/posts :: posts(appUser=${applicationUser}, currentUser=${applicationUser})"></div>
+				<div th:replace="userInfo :: userInfo(applicationUser=${applicationUser})"></div>
+				<div th:replace="posts :: posts(applicationUser=${applicationUser}, currentUser=${applicationUser})"></div>
 			</div>
 		</main>
 	</body>

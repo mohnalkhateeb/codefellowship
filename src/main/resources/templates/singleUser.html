@@ -3,13 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Code Fellowship - Single User</title>
-		<link
-		 href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		 rel="stylesheet"
-		 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-		 crossorigin="anonymous"
-		>
-		<link href="/style.css" rel="stylesheet">
+
 	</head>
 	
 	<body>
@@ -20,8 +14,8 @@
 		<main class="container">
 			<h1>Learn more about <span th:text="${otherUser.username}"></span>!</h1>
 			<div>
-				<div th:replace="fragments/userInfo :: userInfo(appUser=${otherUser})"></div>
-				<div th:replace="fragments/posts :: posts(appUser=${otherUser}, currentUser=${otherUser})"></div>
+				<div th:replace="userInfo :: userInfo(applicationUser=${otherUser})"></div>
+				<div th:replace="posts :: posts(applicationUser=${otherUser}, currentUser=${otherUser})"></div>
 			</div>
 		</main>
 	</body>

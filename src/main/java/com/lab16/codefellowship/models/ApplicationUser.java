@@ -7,18 +7,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
     @Id
-//    @Column(name = "id", nullable = false , unique = true)
+    @Column(name = "id",  unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Long getId() {
         return id;
     }
-    @Column(unique = true)
+    @Column(name = "username",unique = true)
     String username;
 
     String password;
@@ -26,6 +27,12 @@ public class ApplicationUser implements UserDetails {
     String lastName;
     Date dateOfBirth;
     String bio;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "applicationUser")
+    List<Post> posts;
+    public ApplicationUser() {
+
+    }
 
     public ApplicationUser(String username, String password, String firstName, String lastName, Date dateOfBirth, String bio) {
         this.username = username;
@@ -35,7 +42,7 @@ public class ApplicationUser implements UserDetails {
         this.dateOfBirth = dateOfBirth;
         this.bio = bio;
     }
-
+    @Override
     public String getUsername() {
         return username;
     }
@@ -60,22 +67,30 @@ public class ApplicationUser implements UserDetails {
         return false;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
-
+    @Override
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
     public String getFirstName() {
         return firstName;
@@ -89,23 +104,31 @@ public class ApplicationUser implements UserDetails {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+//    public void setLastName(String lastName) {
+//        this.lastName = lastName;
+//    }
 
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
+//    public void setDateOfBirth(String dateOfBirth) {
+//        this.dateOfBirth = dateOfBirth;
+//    }
 
     public String getBio() {
         return bio;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+//    public void setBio(String bio) {
+//        this.bio = bio;
+//    }
+
+    @Override
+    public String toString() {
+        return "ApplicationUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                '}';
     }
 }
