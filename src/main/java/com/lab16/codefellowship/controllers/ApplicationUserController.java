@@ -6,15 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ import java.util.List;
 @Controller
 public class ApplicationUserController {
     @Autowired
-    PasswordEncoder encoder;
+   PasswordEncoder encoder;
 
     @Autowired
     ApplicationUserRepository applicationUserRepository;
@@ -33,17 +36,17 @@ public class ApplicationUserController {
                                    @RequestParam Date dateOfBirth, @RequestParam String bio) {
         ApplicationUser newUser = new ApplicationUser(username, encoder.encode(password), firstName, lastName,
                 dateOfBirth, bio);
-        applicationUserRepository.save(newUser);
+        newUser = applicationUserRepository.save(newUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new RedirectView("/profile");
+        return new RedirectView("/myprofile");
     }
 
-    @GetMapping("/profile")
+    @GetMapping("/myprofile")
     public String getProfile(Principal p, Model m) {
         ApplicationUser applicationUser = applicationUserRepository.findApplicationUserByUsername(p.getName());
         m.addAttribute("applicationUser", applicationUser);
-        return "profile";
+        return "myprofile";
     }
 
     @GetMapping("/users")
@@ -63,6 +66,5 @@ public class ApplicationUserController {
         m.addAttribute("currentUser", currentUser);
         return "singleUser";
     }
-
 
 }

@@ -46,12 +46,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .loginPage("/login")
      .defaultSuccessUrl("/myprofile")
      .and()
-     .logout();
+     .logout()
+            .permitAll();
   }
   
-//  @Override
-//  @Bean
-//  public AuthenticationManager authenticationManagerBean() throws Exception {
-//    return super.authenticationManagerBean();
-//  }
+  @Override
+  @Bean
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+    return super.authenticationManagerBean();
+  }
 }

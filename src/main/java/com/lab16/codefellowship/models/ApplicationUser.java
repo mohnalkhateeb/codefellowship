@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class ApplicationUser implements UserDetails {
     @Id
-    @Column(name = "id",  unique = true)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -32,6 +32,11 @@ public class ApplicationUser implements UserDetails {
     List<Post> posts;
     public ApplicationUser() {
 
+    }
+
+    public ApplicationUser(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public ApplicationUser(String username, String password, String firstName, String lastName, Date dateOfBirth, String bio) {

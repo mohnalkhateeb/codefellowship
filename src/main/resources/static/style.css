@@ -1,0 +1,27 @@
+body {
+  background-color: whitesmoke;
+}
+
+header.jumbotron {
+  background-color: lightslategrey;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+  background-color: whitesmoke!important;
+}
+
+nav > p {
+  color: darkslategrey;
+}
+
+div.card {
+  background-color: lightgray;
+}
+
+div > p {
+  color: rgb(12, 12, 12);
+}
+
+.btn-primary {
+  color: whitesmoke!important;
+}

@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+    >
+    <link href="/style.css" rel="stylesheet">
 </head>
 <body>
 <header class="jumbos">
@@ -11,7 +18,7 @@
 
 <main class="container">
     <h1>Log in to your account:</h1>
-    <form method="POST" action="/login">
+    <form th:action="@{/login}" method="post">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp"
@@ -21,7 +28,7 @@
             <label for="password">Password</label>
             <input type="password" name="password" class="form-control" id="password" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">LogIn</button>
     </form>
 </main>
 </body>
