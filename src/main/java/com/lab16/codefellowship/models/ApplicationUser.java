@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 public class ApplicationUser implements UserDetails {
     @Id
-//    @Column(name = "id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
