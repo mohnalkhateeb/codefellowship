@@ -17,11 +17,11 @@ import javax.transaction.Transactional;
 @Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
   @Autowired
-  ApplicationUserRepository userRepository;
+  ApplicationUserRepository applicationUserRepository;
   
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    ApplicationUser user =  userRepository.findApplicationUserByUsername(username);
+    ApplicationUser user =  applicationUserRepository.findApplicationUserByUsername(username);
     if (user == null) {
       System.out.print("Username not found");
       throw new UsernameNotFoundException((username + " not found"));
@@ -30,4 +30,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     SecurityContextHolder.getContext().setAuthentication(authentication);
     return user;
   }
-}
+
+  }
+

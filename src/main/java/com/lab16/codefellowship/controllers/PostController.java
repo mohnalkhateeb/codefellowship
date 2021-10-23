@@ -30,7 +30,12 @@ public class PostController {
     m.addAttribute("applicationUser", applicationUser);
     return "post";
   }
-  
+  @GetMapping("/feed")
+  public String getFeed(Principal p, Model m) {
+    ApplicationUser applicationUser = applicationUserRepository.findApplicationUserByUsername(p.getName());
+    m.addAttribute("applicationUser", applicationUser);
+    return "feed";
+  }
 
   @PostMapping("/post")
   public RedirectView createPost(String body, Principal p) {

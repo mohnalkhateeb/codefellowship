@@ -66,5 +66,20 @@ public class ApplicationUserController {
         m.addAttribute("currentUser", currentUser);
         return "singleUser";
     }
+    @PostMapping("/users/follow")
+    public RedirectView addFollower(long followedUser, Principal p) {
+        ApplicationUser primaryUser = applicationUserRepository.findApplicationUserByUsername(p.getName());
+        primaryUser.addFollower(applicationUserRepository.findById(followedUser).get());
+        applicationUserRepository.save(primaryUser);
+        return new RedirectView("/users");
+    }
+
+    @PostMapping("/users/unfollow")
+    public RedirectView removeFollower(long unfollowedUser, Principal p) {
+        ApplicationUser primaryUser = applicationUserRepository.findApplicationUserByUsername(p.getName());
+        primaryUser.removeFollower(applicationUserRepository.findById(unfollowedUser).get());
+        applicationUserRepository.save(primaryUser);
+        return new RedirectView("/users");
+    }
 
 }

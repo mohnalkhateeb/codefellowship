@@ -1,6 +1,5 @@
 package com.lab16.codefellowship.models;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,11 +7,12 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ApplicationUser implements UserDetails {
     @Id
-    @Column(name = "id")
+//    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -30,6 +30,17 @@ public class ApplicationUser implements UserDetails {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "applicationUser")
     List<Post> posts;
+
+    @ManyToMany
+    @JoinTable(
+            name="user_followers",
+            joinColumns = { @JoinColumn(name = "primaryUser") },
+            inverseJoinColumns = { @JoinColumn(name = "followedUser") }
+    )
+    Set<ApplicationUser> followers;
+
+    @ManyToMany(mappedBy = "followers")
+    Set<ApplicationUser> usersFollowedBy;
     public ApplicationUser() {
 
     }
@@ -72,9 +83,9 @@ public class ApplicationUser implements UserDetails {
         return false;
     }
 
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public List<Post> getPosts() {
         return posts;
@@ -88,14 +99,14 @@ public class ApplicationUser implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
-    @Override
+
     public String getPassword() {
         return password;
     }
 
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -109,25 +120,36 @@ public class ApplicationUser implements UserDetails {
         return lastName;
     }
 
-//    public void setLastName(String lastName) {
-//        this.lastName = lastName;
-//    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-//    public void setDateOfBirth(String dateOfBirth) {
-//        this.dateOfBirth = dateOfBirth;
-//    }
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
     public String getBio() {
         return bio;
     }
 
-//    public void setBio(String bio) {
-//        this.bio = bio;
-//    }
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+    public void addFollower(ApplicationUser follower) {
+        this.followers.add(follower);
+    }
+
+    public void removeFollower(ApplicationUser follower) {
+        this.followers.remove(follower);
+    }
+
+    public Set<ApplicationUser> getFollowers() {
+        return this.followers;
+    }
 
     @Override
     public String toString() {
